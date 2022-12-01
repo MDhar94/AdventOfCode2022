@@ -1,5 +1,4 @@
-DAY=1
+DAY=2
 newday:
-	mkdir $(DAY)
-	cp template.py $(DAY)/$(DAY).py
+	cp template.py challenges/Day$(DAY).py
 	code .
