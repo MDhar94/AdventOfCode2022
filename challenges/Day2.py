@@ -9,14 +9,21 @@ df = pd.read_csv(data_path
             , header=None
             , names=['Opponent','Response'])
 
-def part1(df):
+choice_dict2 = {'A':'Rock'
+               , 'B':'Paper'
+               ,'C':'Scissors'
+               ,'X':'Lose'
+               ,'Y':'Draw'
+               ,'Z':'Win'}
 
-    choice_dict = {'A':'Rock'
+choice_dict = {'A':'Rock'
                , 'B':'Paper'
                ,'C':'Scissors'
                ,'X':'Rock'
                ,'Y':'Paper'
                ,'Z':'Scissors'}
+
+def part1(df):
 
     df = df.replace({'Opponent':choice_dict
             ,'Response':choice_dict})
@@ -48,10 +55,39 @@ def part1(df):
     return df.Score.sum()
 
 def part2(df):
-    pass
+
+    df2 = df.rename(columns={'Response':'Result'}).replace({'Opponent':choice_dict
+                                                        ,'Result':choice_dict2})
+
+    def score_calculator2(row):
+
+        combo_dict = {'RockLose':'Scissors', 'RockDraw':'Rock','RockWin':'Paper'
+                    ,'ScissorsLose':'Paper','ScissorsDraw':'Scissors','ScissorsWin':'Rock'
+                    ,'PaperLose':'Rock','PaperDraw':'Paper','PaperWin':'Scissors'}
+
+        score_dict = {'Win':6,'Draw':3,'Lose':0}
+
+        choice_score_dict = {'Rock':1,'Paper':2,'Scissors':3}
+
+        combination = row['Opponent'] + row['Result']
+
+        sign_played = combo_dict[combination]
+
+        sign_score = choice_score_dict[sign_played]
+        round_score = score_dict[row['Result']]
+
+        return sign_score + round_score
+
+    df2['score'] = df2.apply(lambda row: score_calculator2(row),axis=1)
+
+    return df2['score'].sum()
 
 if __name__ == '__main__':
 
     part1_output = part1(df)
+    part2_output = part2(df)
+
 
     print(part1_output)
+
+    print(part2_output)
