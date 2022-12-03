@@ -55,4 +55,4 @@ if __name__ == '__main__':
     output_part1 = part1(data)
     output_part2 = part2(data)
 
-    print(output_part1, output_part2)
+    print(f'Challenge 1 solution: {output_part1}\nChallenge 2 solution: {output_part2}')
