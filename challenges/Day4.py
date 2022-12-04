@@ -22,8 +22,10 @@ def part1(data):
         elf1 = [int(x) for x in split[:2]]
         elf2 = [int(x) for x in split[2:]]
 
-        range1 = list(range(elf1[0],elf1[1]))
-        range2 = list(range(elf2[0],elf2[1]))
+        # Need to '+1' on range end to include lists of n=1
+        # otherwise they return empty lists which are included as subsets
+        range1 = list(range(elf1[0],elf1[1]+1))
+        range2 = list(range(elf2[0],elf2[1]+1))
 
         if set(range1).issubset(range2) or set(range2).issubset(range1):
 
