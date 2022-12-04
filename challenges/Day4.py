@@ -31,12 +31,34 @@ def part1(data):
 
             answer_count += 1
 
-    return print(answer_count)
+    return answer_count
 
 
 def part2(data):
-    pass
+
+    data = data.split(sep='\n')
+
+    answer_count = 0
+
+    for area in data:
+
+        split = re.split(',| |\-', area)
+
+        elf1 = [int(x) for x in split[:2]]
+        elf2 = [int(x) for x in split[2:]]
+
+        range1 = list(range(elf1[0],elf1[1]+1))
+        range2 = list(range(elf2[0],elf2[1]+1))
+
+        if len(list(set(range1).intersection(range2)))>0:
+
+            answer_count += 1
+
+    return answer_count
 
 if __name__ == '__main__':
 
-    part1(data)
+    output_part1 = part1(data)
+    output_part2 = part2(data)
+
+    print(f"Part 1 solution: {output_part1}\nPart 2 solution: {output_part2}")
