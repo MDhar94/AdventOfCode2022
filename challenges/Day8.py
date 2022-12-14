@@ -7,6 +7,10 @@ with open(LOCAL_TOKEN_PATH+'token.txt') as f:
 # Update 'get_data' params to get the desired day's data
 # data = get_data(session=token,day=,year=2022)
 
+def print_map(data):
+
+
+
 def part1(data):
     pass
 
